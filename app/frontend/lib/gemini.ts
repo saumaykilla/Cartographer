@@ -145,7 +145,7 @@ export async function analyzeProductImage(
   - healthSignal: A brief note on its nutritional profile (e.g. "High in protein", "Highly processed", "Great source of fiber").
   - isCommonInUS: Boolean, whether this is a staple in American homes.
   - culturalContext: If this has an equivalent or similar product in other cultures, mention it.
-  - homeCountryContext: Provide specific context for someone from ${homeCountry}. For example, "This is like X in ${homeCountry}" or "In ${homeCountry}, we use Y instead, but this is the closest US equivalent."
+  - homeCountryContext: Provide specific context for someone from ${homeCountry}. For example, "This is like X in ${homeCountry}" or "In ${homeCountry}, we use Y instead. This is the closest US equivalent." Mention naming differences (e.g. "Cilantro" vs "Coriander") if relevant.
 
   Return ONLY valid JSON. No markdown fences.`;
 
@@ -185,11 +185,14 @@ export async function analyzeProductImage(
   }
 
   const data = await response.json();
-  const raw = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '{}';
+  let raw = data?.candidates?.[0]?.content?.parts?.[0]?.text ?? '{}';
+  
+  // Clean up any markdown fences if they slipped through
+  raw = raw.replace(/```json\n?/, '').replace(/\n?```/, '').trim();
 
   try {
     return JSON.parse(raw);
-  } catch {
+  } catch (e) {
     console.error('Failed to parse Gemini response:', raw);
     throw new Error('Could not parse AI response. Please try again.');
   }

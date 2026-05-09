@@ -80,10 +80,10 @@ export default function HomeScreen({ navigation }: any) {
   }, [activeList?.id, fetchActiveList]);
 
   const QUICK_ACTIONS = [
-    { id: 'scan', name: 'Scan Label', icon: 'camera-scan', color: '#3B82F6', screen: 'MagicLens' },
-    { id: 'list', name: 'New List', icon: 'playlist-plus', color: '#10B981', screen: 'Lists' },
+    { id: 'scan', name: 'Scan Label', icon: 'barcode-scan', color: '#3B82F6', screen: 'MagicLens' },
+    { id: 'list', name: 'New List', icon: 'playlist-plus', color: '#10B981', screen: 'List' },
     { id: 'diet', name: 'Dietary Check', icon: 'leaf', color: '#F59E0B', screen: 'Profile' },
-    { id: 'history', name: 'History', icon: 'history', color: '#8B5CF6', screen: 'Lists' },
+    { id: 'history', name: 'History', icon: 'history', color: '#8B5CF6', screen: 'List' },
   ];
 
   const DAILY_TIP = {
@@ -139,7 +139,7 @@ export default function HomeScreen({ navigation }: any) {
           ) : activeList ? (
             <TouchableOpacity 
               style={styles.listWidget}
-              onPress={() => navigation.navigate('Lists')}
+              onPress={() => navigation.navigate('List')}
             >
               <View style={styles.listInfo}>
                 <View style={styles.listHeaderRow}>

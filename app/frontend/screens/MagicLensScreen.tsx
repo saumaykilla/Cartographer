@@ -4,6 +4,7 @@ import { CameraView, useCameraPermissions } from 'expo-camera';
 import { useAuth } from '../context/AuthContext';
 import { supabase } from '../lib/supabase';
 import { analyzeProductImage, ProductAnalysis } from '../lib/gemini';
+import { useRef, useState } from 'react';
 
 interface ShoppingList { id: string; name: string; title?: string; }
 
