@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, SafeAreaView, Platform, Alert, ActivityIndicator, TextInput, ScrollView, KeyboardAvoidingView } from 'react-native';
 import { supabase } from '../lib/supabase';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function AuthScreen() {
   const [loading, setLoading] = useState(false);
@@ -48,6 +49,23 @@ export default function AuthScreen() {
     }
   };
 
+  const handleSocialAuth = async (provider: 'google' | 'apple' | 'facebook') => {
+    setLoading(true);
+    try {
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider,
+        options: {
+          redirectTo: 'homecart://auth-callback', // This would be configured in Supabase and app.json
+        }
+      });
+      if (error) throw error;
+    } catch (err: any) {
+      console.error(`[Auth] ${provider} auth error:`, err);
+      Alert.alert('Authentication Error', err.message || 'An unexpected error occurred');
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -58,7 +76,7 @@ export default function AuthScreen() {
       >
         <ScrollView contentContainerStyle={styles.scrollContent}>
           <View style={styles.content}>
-            <Text style={styles.title}>Cartographer</Text>
+            <Text style={styles.title}>HomeCart</Text>
             <Text style={styles.subtitle}>Your AI Grocery Companion</Text>
             
             <View style={styles.form}>
@@ -112,7 +130,34 @@ export default function AuthScreen() {
                 )}
               </TouchableOpacity>
 
+              <View style={styles.dividerContainer}>
+                <View style={styles.divider} />
+                <Text style={styles.dividerText}>or continue with</Text>
+                <View style={styles.divider} />
+              </View>
 
+              <View style={styles.socialButtons}>
+                <TouchableOpacity 
+                  style={[styles.socialButton, styles.googleButton]} 
+                  onPress={() => handleSocialAuth('google')}
+                >
+                  <MaterialCommunityIcons name="google" size={24} color="#EA4335" />
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                  style={[styles.socialButton, styles.appleButton]} 
+                  onPress={() => handleSocialAuth('apple')}
+                >
+                  <MaterialCommunityIcons name="apple" size={24} color="#000" />
+                </TouchableOpacity>
+
+                <TouchableOpacity 
+                  style={[styles.socialButton, styles.facebookButton]} 
+                  onPress={() => handleSocialAuth('facebook')}
+                >
+                  <MaterialCommunityIcons name="facebook" size={24} color="#1877F2" />
+                </TouchableOpacity>
+              </View>
 
               <TouchableOpacity 
                 style={styles.toggleButton}
@@ -199,6 +244,40 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#fff',
   },
+  dividerContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginVertical: 32,
+  },
+  divider: {
+    flex: 1,
+    height: 1,
+    backgroundColor: '#E2E8F0',
+  },
+  dividerText: {
+    paddingHorizontal: 16,
+    color: '#94A3B8',
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  socialButtons: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 20,
+  },
+  socialButton: {
+    width: 64,
+    height: 64,
+    borderRadius: 32,
+    backgroundColor: '#F8FAFC',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderColor: '#E2E8F0',
+  },
+  googleButton: {},
+  appleButton: {},
+  facebookButton: {},
 
   toggleButton: {
     marginTop: 24,

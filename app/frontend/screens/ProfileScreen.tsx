@@ -255,7 +255,7 @@ export default function ProfileScreen() {
 
           <View style={styles.memberBadge}>
             <MaterialCommunityIcons name="earth" size={11} color="#3B82F6" />
-            <Text style={styles.memberBadgeText}>Cartographer Member</Text>
+            <Text style={styles.memberBadgeText}>HomeCart Member</Text>
           </View>
         </View>
 

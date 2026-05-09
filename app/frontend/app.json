@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
-    "scheme": "cartographer",
+    "name": "HomeCart",
+    "slug": "homecart",
+    "scheme": "homecart",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -15,13 +15,13 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.saumay.cartographer",
+      "bundleIdentifier": "com.saumay.homecart",
       "infoPlist": {
-        "NSCameraUsageDescription": "Cartographer needs camera access to scan product labels and identify dietary compatibility."
+        "NSCameraUsageDescription": "HomeCart needs camera access to scan product labels and identify dietary compatibility."
       }
     },
     "android": {
-      "package": "com.saumay.cartographer",
+      "package": "com.saumay.homecart",
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
@@ -39,7 +39,7 @@
       [
         "expo-camera",
         {
-          "cameraPermission": "Allow Cartographer to access your camera"
+          "cameraPermission": "Allow HomeCart to access your camera"
         }
       ]
     ]

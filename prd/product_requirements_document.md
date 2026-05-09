@@ -1,4 +1,4 @@
-# Product Requirements Document: Cartographer
+# Product Requirements Document: HomeCart
 
 **Version:** 1.0  
 **Status:** Finalized (Design Phase)  
@@ -7,7 +7,7 @@
 ---
 
 ## 1. Executive Summary
-Cartographer is a mobile-first AI companion designed to help immigrants and international newcomers navigate American grocery stores with confidence. It bridges the gap between unfamiliar products and the foods, flavors, and habits of their home countries, using real-time computer vision and cultural intelligence.
+HomeCart is a mobile-first AI companion designed to help immigrants and international newcomers navigate American grocery stores with confidence. It bridges the gap between unfamiliar products and the foods, flavors, and habits of their home countries, using real-time computer vision and cultural intelligence.
 
 ## 2. Problem Statement
 For newcomers to the US, the grocery store is a site of daily stress. Thousands of unfamiliar brands, complex labels, and different cultural defaults make "simple" shopping tasks overwhelming. There is no existing "orientation layer" that translates US retail reality into global cultural context.

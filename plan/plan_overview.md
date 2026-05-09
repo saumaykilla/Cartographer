@@ -1,6 +1,6 @@
-# Master Implementation Plan: Cartographer
+# Master Implementation Plan: HomeCart
 
-This document outlines the phased roadmap for building the Cartographer MVP. Each phase is designed to be atomic and testable.
+This document outlines the phased roadmap for building the HomeCart MVP. Each phase is designed to be atomic and testable.
 
 ## 🗺️ Roadmap Overview
 

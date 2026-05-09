@@ -1,6 +1,6 @@
-# Decision Log: Cartographer
+# Decision Log: HomeCart
 
-This document tracks the core design decisions made during the brainstorming phase for the Cartographer project.
+This document tracks the core design decisions made during the brainstorming phase for the HomeCart project.
 
 | Date | Decision | Alternatives Considered | Rationale |
 | :--- | :--- | :--- | :--- |

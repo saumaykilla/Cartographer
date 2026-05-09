@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-app = FastAPI(title="Cartographer Backend")
+app = FastAPI(title="HomeCart Backend")
 
 # Supabase Setup
 url: str = os.environ.get("SUPABASE_URL")
@@ -14,7 +14,7 @@ supabase: Client = create_client(url, key)
 
 @app.get("/")
 async def root():
-    return {"message": "Cartographer API is running"}
+    return {"message": "HomeCart API is running"}
 
 @app.get("/health")
 async def health_check():

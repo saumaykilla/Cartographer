@@ -22,7 +22,7 @@ const DIETARY = ['Vegetarian', 'Vegan', 'Halal', 'Kosher', 'Gluten-Free', 'Lacto
 
 export default function OnboardingScreen() {
   const { user, refreshProfile } = useAuth();
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
   const [region, setRegion] = useState('');
   const [language, setLanguage] = useState('English');
   const [dietary, setDietary] = useState<string[]>([]);
@@ -56,6 +56,19 @@ export default function OnboardingScreen() {
       setIsSubmitting(false);
     }
   };
+
+  const renderStep0 = () => (
+    <View style={[styles.stepContainer, styles.welcomeContainer]}>
+      <View style={styles.iconContainer}>
+        <Text style={styles.welcomeEmoji}>🌍</Text>
+      </View>
+      <Text style={styles.header}>Welcome to HomeCart</Text>
+      <Text style={styles.subheader}>
+        Moving to a new country is hard. Finding your favorite foods shouldn't be. 
+        Let's personalize your experience.
+      </Text>
+    </View>
+  );
 
   const renderStep1 = () => (
     <View style={styles.stepContainer}>
@@ -119,13 +132,14 @@ export default function OnboardingScreen() {
       </View>
       
       <ScrollView contentContainerStyle={styles.scrollContent}>
+        {step === 0 && renderStep0()}
         {step === 1 && renderStep1()}
         {step === 2 && renderStep2()}
         {step === 3 && renderStep3()}
       </ScrollView>
 
       <View style={styles.footer}>
-        {step > 1 && (
+        {step > 0 && (
           <TouchableOpacity style={styles.backButton} onPress={() => setStep(step - 1)}>
             <Text style={styles.backButtonText}>Back</Text>
           </TouchableOpacity>
@@ -135,7 +149,9 @@ export default function OnboardingScreen() {
           onPress={() => step < 3 ? setStep(step + 1) : handleComplete()}
           disabled={(!region && step === 1) || isSubmitting}
         >
-          <Text style={styles.nextButtonText}>{step === 3 ? 'Get Started' : 'Next'}</Text>
+          <Text style={styles.nextButtonText}>
+            {step === 0 ? "Let's Go" : step === 3 ? 'Get Started' : 'Next'}
+          </Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
@@ -178,6 +194,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     gap: 16,
+    padding:36,
     justifyContent: 'space-between',
   },
   flagCard: {
@@ -285,5 +302,21 @@ const styles = StyleSheet.create({
   },
   disabledButton: {
     backgroundColor: '#94A3B8',
+  },
+  welcomeContainer: {
+    alignItems: 'center',
+    paddingTop: 40,
+  },
+  iconContainer: {
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    backgroundColor: '#EFF6FF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 32,
+  },
+  welcomeEmoji: {
+    fontSize: 48,
   },
 });

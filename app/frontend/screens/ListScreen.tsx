@@ -189,7 +189,7 @@ export default function ListScreen() {
       .channel('shopping_lists_changes')
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'shopping_lists', filter: `user_id=eq.${user.id}` },
+        { event: '*', schema: 'public', table: 'shopping_lists', filter: `user_id=eq.'${user.id}'` },
         () => {
           console.log('[Realtime] Lists changed, refetching...');
           fetchLists(selectedListRef.current || undefined);
@@ -210,7 +210,7 @@ export default function ListScreen() {
       .channel(`list_items_${selectedList.id}`)
       .on(
         'postgres_changes',
-        { event: '*', schema: 'public', table: 'list_items', filter: `list_id=eq.${selectedList.id}` },
+        { event: '*', schema: 'public', table: 'list_items', filter: `list_id=eq.'${selectedList.id}'` },
         () => {
           console.log('[Realtime] Items changed, refetching...');
           fetchItems(selectedList.id);

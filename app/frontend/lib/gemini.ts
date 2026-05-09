@@ -1,5 +1,5 @@
 /**
- * Cartographer — Gemini 2.5 Flash Substitution Engine
+ * HomeCart — Gemini 2.5 Flash Substitution Engine
  * Calls the Gemini API via REST to keep the bundle lightweight in React Native.
  */
 
@@ -30,7 +30,7 @@ function buildSystemPrompt(dietaryPreferences: string[]): string {
 4. If no fully-compliant product exists, suggest the closest compliant alternative and explain.`
     : '';
 
-  return `You are Cartographer's AI culinary assistant, specialized in helping immigrants and travelers find familiar food products in the US.
+  return `You are HomeCart's AI culinary assistant, specialized in helping immigrants and travelers find familiar food products in the US.
 
 When given a search query (a brand name, ingredient, or dish from another country), return a JSON array of 3–4 product substitutions available in mainstream US grocery stores.${dietaryClause}
 
@@ -114,13 +114,16 @@ export interface ProductAnalysis {
   dietaryNote: string;
   healthSignal: string;
   isCommonInUS: boolean;
+  unitConversion?: string;
   culturalContext?: string;
+  homeCountryContext?: string;
 }
 
 export async function analyzeProductImage(
   base64Image: string,
   dietaryPreferences: string[] = [],
-  preferredLanguage: string = 'English'
+  preferredLanguage: string = 'English',
+  homeCountry: string = 'India'
 ): Promise<ProductAnalysis> {
   if (!GEMINI_API_KEY) {
     throw new Error('EXPO_PUBLIC_GEMINI_API_KEY is not configured.');
@@ -130,18 +133,19 @@ export async function analyzeProductImage(
     ? `The user has the following dietary preferences: ${dietaryPreferences.join(', ')}.`
     : '';
 
-  const systemPrompt = `You are Cartographer's AI culinary assistant. Your task is to identify a product from an image taken in an American grocery store and provide cultural context for someone new to the US.
+  const systemPrompt = `You are HomeCart's AI culinary assistant. Your task is to identify a product from an image taken in an American grocery store and provide cultural context for someone new to the US, specifically from the perspective of someone from ${homeCountry}.
   
   Identify the product and provide the following in ${preferredLanguage}:
   - productName: The common name of the product.
   - brand: The brand name.
-  - Unit Conversion : Conversion of unit to grams, milliliters, etc if needed
+  - unitConversion: A brief conversion of the product's units (oz, lbs, fl oz) to metric units (grams, milliliters, etc.) if applicable.
   - description: 1-2 sentences explaining what it is.
   - howToUse: 1-2 sentences on how Americans typically use or cook with this.
   - dietaryNote: A summary of its dietary compatibility (Vegan, GF, Halal, etc.) and if it matches the user's preferences. ${dietaryClause}
   - healthSignal: A brief note on its nutritional profile (e.g. "High in protein", "Highly processed", "Great source of fiber").
   - isCommonInUS: Boolean, whether this is a staple in American homes.
   - culturalContext: If this has an equivalent or similar product in other cultures, mention it.
+  - homeCountryContext: Provide specific context for someone from ${homeCountry}. For example, "This is like X in ${homeCountry}" or "In ${homeCountry}, we use Y instead, but this is the closest US equivalent."
 
   Return ONLY valid JSON. No markdown fences.`;
 

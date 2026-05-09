@@ -3,10 +3,12 @@ CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
 -- 1. Profiles Table
 CREATE TABLE IF NOT EXISTS profiles (
-    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
-    home_country TEXT NOT NULL,
-    preferred_language TEXT NOT NULL,
+    id UUID PRIMARY KEY,
+    full_name TEXT,
+    home_country TEXT,
+    preferred_language TEXT,
     dietary_preferences TEXT[] DEFAULT '{}',
+    onboarding_completed BOOLEAN DEFAULT FALSE,
     created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
