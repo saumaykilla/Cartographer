@@ -25,5 +25,5 @@ This document outlines the phased roadmap for building the Cartographer MVP. Eac
 ## 🛠️ Tech Stack (Assumed)
 - **Frontend:** React Native / Expo
 - **Backend/Auth:** Supabase
-- **AI/Vision:** Google Gemini (Vertex AI) / OpenAI
+- **AI/Vision:** Google Gemini 2.5 Flash & Multimodal Live API (Vertex AI)
 - **Maps:** Mapbox / Google Maps SDK

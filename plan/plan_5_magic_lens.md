@@ -9,7 +9,7 @@ The "Survival Mode" feature. Integrating the camera and real-time computer visio
    - [ ] Implement object detection frame capture (local or cloud-triggered).
 
 2. **Vision-AI Integration**
-   - [ ] Connect to Vision API (e.g., Vertex AI Gemini with Multimodal input).
+   - [ ] Connect to Gemini Multimodal Live API (Vertex AI) for low-latency scanning.
    - [ ] Pass user profile (Origin/Language) as context for every scan.
 
 3. **AR Overlay UI**

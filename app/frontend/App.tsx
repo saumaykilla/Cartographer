@@ -12,8 +12,11 @@ import MapScreen from './screens/MapScreen';
 import ListScreen from './screens/ListScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import MagicLensScreen from './screens/MagicLensScreen';
+import SearchScreen from './screens/SearchScreen';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Tab = createBottomTabNavigator();
+const Stack = createNativeStackNavigator();
 
 function MainTabNavigator() {
   return (
@@ -99,6 +102,15 @@ function MainTabNavigator() {
   );
 }
 
+function RootStack() {
+  return (
+    <Stack.Navigator screenOptions={{ headerShown: false }}>
+      <Stack.Screen name="MainTabs" component={MainTabNavigator} />
+      <Stack.Screen name="Search" component={SearchScreen} />
+    </Stack.Navigator>
+  );
+}
+
 function AppContent() {
   const { user, profile, loading } = useAuth();
 
@@ -128,7 +140,7 @@ function AppContent() {
 
   return (
     <NavigationContainer>
-      <MainTabNavigator />
+      <RootStack />
     </NavigationContainer>
   );
 }

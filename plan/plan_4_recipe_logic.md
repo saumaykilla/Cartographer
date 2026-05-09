@@ -5,16 +5,20 @@ Implementing the "Planning Mode" hero feature that translates recipes into shopp
 
 ## Tasks
 1. **Recipe Input Handler**
-   - [ ] Build input field for dish names or recipe URLs.
-   - [ ] Implement AI extraction prompt (e.g. "Extract ingredients for [Dish] and map to US staples").
+   - [x] Build input field for dish names or recipe URLs.
+   - [x] Implement AI extraction prompt (e.g. "Extract ingredients for [Dish] and map to US staples").
 
 2. **Substitution Engine**
-   - [ ] Integrate with an LLM (Gemini Flash) to generate:
+   - [x] Integrate with Gemini 2.5 Flash to generate:
      - Closest US Brand/Item.
      - Match Score (%).
      - Preparation Tip (Cultural context).
-   - [ ] Implement "Value vs Quality" toggle logic.
+   - [x] `lib/gemini.ts` — REST-based client, no SDK needed for RN.
+   - [ ] Implement "Value vs Quality" toggle logic (UI only for now).
 
 3. **List Management**
-   - [ ] Create/Update lists in Supabase.
+   - [x] Create/Update lists in Supabase.
+   - [x] Full ListScreen with CRUD (create/delete lists, toggle/delete items).
+   - [x] DB migration: added name, brand, category, notes, is_checked columns.
+   - [x] RLS policies enabled for all tables.
    - [ ] Implement "Export to Instacart" deep-link functionality.

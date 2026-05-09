@@ -15,7 +15,10 @@
     },
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.saumay.cartographer"
+      "bundleIdentifier": "com.saumay.cartographer",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Cartographer needs camera access to scan product labels and identify dietary compatibility."
+      }
     },
     "android": {
       "package": "com.saumay.cartographer",
@@ -24,14 +27,21 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "permissions": ["CAMERA"]
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "plugins": [
       "expo-secure-store",
-      "expo-web-browser"
+      "expo-web-browser",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow Cartographer to access your camera"
+        }
+      ]
     ]
   }
 }
